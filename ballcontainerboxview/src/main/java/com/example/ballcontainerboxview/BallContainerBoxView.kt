@@ -90,17 +90,19 @@ class BallContainerBoxView (ctx : Context) : View(ctx) {
             val h : Float = canvas.height.toFloat()
             val size : Float = Math.min(w, h)/5
             val r : Float = Math.min(w, h) / 15
+            paint.strokeCap = Paint.Cap.ROUND
+            paint.strokeWidth = r / 5
             canvas.save()
             canvas.translate(w/2, 4 * h/5)
             paint.color = Color.parseColor("#e74c3c")
-            canvas.drawCircle(0f, -0.8f * h * state.scales[2], r * state.scales[1], paint)
+            canvas.drawCircle(0f, (-0.8f * h - 2 * r) * state.scales[2], r * state.scales[1], paint)
             paint.color = Color.parseColor("#2ecc71")
             canvas.drawLine(-size/2, -size/2, -size/2, size/2, paint)
             canvas.drawLine(-size/2, size/2, size/2, size/2, paint)
             canvas.drawLine(size/2, size/2, size/2, -size/2, paint)
             canvas.save()
             canvas.translate(-size/2, -size/2)
-            canvas.rotate(90f * (state.scales[0] + 1 - state.scales[3]))
+            canvas.rotate(-105f * (state.scales[0] * (1 - state.scales[3])))
             canvas.drawLine(0f, 0f, size, 0f, paint)
             canvas.restore()
             canvas.restore()
