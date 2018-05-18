@@ -110,6 +110,28 @@ class BallContainerBoxView (ctx : Context) : View(ctx) {
         fun update(stopcb : (Float) -> Unit) {
             state.update(stopcb)
         }
+    }
 
+    data class Renderer(var view : BallContainerBoxView) {
+
+        private val animator : Animator = Animator(view)
+
+        private val ballContainerBox : BallContainerBox = BallContainerBox(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#212121"))
+            ballContainerBox.draw(canvas, paint)
+            animator.animate {
+                ballContainerBox.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ballContainerBox.startUpdating {
+                animator.start()
+            }
+        }
     }
 }
