@@ -4,6 +4,7 @@ package com.example.ballcontainerboxview
  * Created by anweshmishra on 18/05/18.
  */
 
+import android.app.Activity
 import android.content.*
 import android.graphics.*
 import android.view.View
@@ -134,6 +135,14 @@ class BallContainerBoxView (ctx : Context) : View(ctx) {
             ballContainerBox.startUpdating {
                 animator.start()
             }
+        }
+    }
+    companion object {
+
+        fun create(activity : Activity) : BallContainerBoxView {
+            val view : BallContainerBoxView = BallContainerBoxView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
